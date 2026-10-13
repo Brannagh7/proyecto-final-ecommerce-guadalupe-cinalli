@@ -10,4 +10,10 @@ Aplicar HTML, CSS, diseño responsivo con Flexbox, Grid y Media Queries, y publi
 - Inicio
 - Productos
 - Reseñas
-- Contacto
+- Contacto (formulario con Formspree)
+
+## Formulario de contacto
+Se utilizó Formspree para recibir los mensajes sin programar un servidor: creé un formulario en formspree.io y puse su URL en el `action` del `<form>`, con `method="POST"`. Los mensajes llegan directo a mi correo.
+
+## Publicación
+Sitio publicado con GitHub Pages: https://brannagh7.github.io/proyecto-final-ecommerce-guadalupe-cinalli/
