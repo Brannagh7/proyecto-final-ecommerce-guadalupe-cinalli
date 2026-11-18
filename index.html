@@ -105,6 +105,20 @@
     <footer>
         <p>© 2026 ElectroHogar. Todos los derechos reservados.</p>
     </footer>
+    <div id="overlay" class="overlay"></div>
+
+    <aside id="panel-carrito" class="panel-carrito" aria-label="Carrito de compras" aria-hidden="true">
+        <div class="panel-header">
+            <h2>Tu carrito</h2>
+            <button type="button" id="cerrar-carrito" aria-label="Cerrar carrito">✕</button>
+        </div>
+        <div id="lista-carrito" class="lista-carrito"></div>
+        <div class="panel-footer">
+            <p class="total">Total: <span id="total-carrito">$ 0,00</span></p>
+            <button type="button" id="finalizar-compra">Finalizar compra</button>
+            <button type="button" id="vaciar-carrito" class="secundario">Vaciar carrito</button>
+        </div>
+    </aside>
     <script src="script.js"></script>
 </body>
 
