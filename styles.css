@@ -358,6 +358,15 @@ button.secundario {
     transform: translateX(-50%) translateY(0);
 }
 
+/*Accesibilidad*/
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+    outline: 3px solid #f2b600;
+    outline-offset: 2px;
+}
+
 /*Media*/
 @media (max-width: 768px) {
     nav ul {
