@@ -8,6 +8,8 @@ const listaCarrito = document.getElementById("lista-carrito");
 const totalCarrito = document.getElementById("total-carrito");
 const btnFinalizar = document.getElementById("finalizar-compra");
 const btnVaciar = document.getElementById("vaciar-carrito");
+const aviso = document.getElementById("aviso");
+let temporizadorAviso;
 
 let productos = [];
 
@@ -16,6 +18,16 @@ function formatearPrecio(valor) {
         style: "currency",
         currency: "ARS"
     });
+}
+
+function mostrarAviso(mensaje) {
+    aviso.textContent = mensaje;
+    aviso.classList.add("visible");
+
+    clearTimeout(temporizadorAviso);
+    temporizadorAviso = setTimeout(function () {
+        aviso.classList.remove("visible");
+    }, 2500);
 }
 
 // datos del carrito (localStorage //
@@ -173,7 +185,16 @@ seccionProductos.addEventListener("click", function (evento) {
     if (!boton) {
         return;
     }
-    agregarAlCarrito(Number(boton.dataset.id));
+
+    const id = Number(boton.dataset.id);
+    agregarAlCarrito(id);
+
+    const producto = productos.find(function (p) {
+        return p.id === id;
+    });
+    if (producto) {
+        mostrarAviso("Agregaste " + producto.titulo + " al carrito");
+    }
 });
 
 listaCarrito.addEventListener("click", function (evento) {
