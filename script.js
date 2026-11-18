@@ -1,4 +1,55 @@
 const seccionProductos = document.getElementById("productos");
+const contadorCarrito = document.getElementById("contador-carrito");
+
+let productos = [];
+
+// carrito //
+
+function obtenerCarrito() {
+    try {
+        return JSON.parse(localStorage.getItem("carrito")) || [];
+    } catch (error) {
+        return [];
+    }
+}
+
+function guardarCarrito(carrito) {
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+function actualizarContador() {
+    const carrito = obtenerCarrito();
+    const total = carrito.reduce(function (suma, item) {
+        return suma + item.cantidad;
+    }, 0);
+    contadorCarrito.textContent = total;
+}
+
+function agregarAlCarrito(id) {
+    const carrito = obtenerCarrito();
+    const existente = carrito.find(function (item) {
+        return item.id === id;
+    });
+
+    if (existente) {
+        existente.cantidad++;
+    } else {
+        carrito.push({ id: id, cantidad: 1 });
+    }
+
+    guardarCarrito(carrito);
+    actualizarContador();
+}
+
+seccionProductos.addEventListener("click", function (evento) {
+    const boton = evento.target.closest("button[data-id]");
+    if (!boton) {
+        return;
+    }
+    agregarAlCarrito(Number(boton.dataset.id));
+});
+
+// productos //
 
 function crearCard(producto) {
     const precio = producto.precio.toLocaleString("es-AR", {
@@ -26,7 +77,7 @@ async function cargarProductos() {
         if (!respuesta.ok) {
             throw new Error("Error " + respuesta.status);
         }
-        const productos = await respuesta.json();
+        productos = await respuesta.json();
 
         productos.forEach(function (producto) {
             seccionProductos.insertAdjacentHTML("beforeend", crearCard(producto));
@@ -41,3 +92,4 @@ async function cargarProductos() {
 }
 
 cargarProductos();
+actualizarContador();
