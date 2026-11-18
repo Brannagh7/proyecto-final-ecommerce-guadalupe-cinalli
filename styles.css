@@ -194,6 +194,21 @@ textarea:focus {
     border-color: var(--color-principal);
     outline: none;
 }
+.error {
+    color: #b3261e;
+    font-size: 0.85rem;
+}
+
+input.invalido,
+textarea.invalido {
+    border-color: #b3261e;
+}
+
+#estado-form {
+    font-weight: 600;
+    text-align: center;
+}
+
 /*Carrito*/
 .btn-carrito {
     background: transparent;

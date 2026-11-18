@@ -267,3 +267,61 @@ async function cargarProductos() {
 
 cargarProductos();
 actualizarContador();
+
+// formulario de contacto //
+
+const formContacto = document.getElementById("form-contacto");
+const estadoForm = document.getElementById("estado-form");
+
+function mostrarError(campo, mensaje) {
+    const error = document.getElementById("error-" + campo.id);
+    error.textContent = mensaje;
+    campo.classList.toggle("invalido", mensaje !== "");
+    campo.setAttribute("aria-invalid", mensaje !== "" ? "true" : "false");
+}
+
+function validarNombre() {
+    const campo = document.getElementById("nombre");
+    if (campo.value.trim().length < 2) {
+        mostrarError(campo, "Ingresá tu nombre (mínimo 2 letras).");
+        return false;
+    }
+    mostrarError(campo, "");
+    return true;
+}
+
+function validarEmail() {
+    const campo = document.getElementById("email");
+    const formato = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (campo.value.trim() === "") {
+        mostrarError(campo, "Ingresá tu correo electrónico.");
+        return false;
+    }
+    if (!formato.test(campo.value.trim())) {
+        mostrarError(campo, "El correo no tiene un formato válido (ej: nombre@correo.com).");
+        return false;
+    }
+    mostrarError(campo, "");
+    return true;
+}
+
+function validarMensaje() {
+    const campo = document.getElementById("mensaje");
+    if (campo.value.trim().length < 10) {
+        mostrarError(campo, "El mensaje debe tener al menos 10 caracteres.");
+        return false;
+    }
+    mostrarError(campo, "");
+    return true;
+}
+
+formContacto.addEventListener("submit", function (evento) {
+    const nombreOk = validarNombre();
+    const emailOk = validarEmail();
+    const mensajeOk = validarMensaje();
+
+    if (!(nombreOk && emailOk && mensajeOk)) {
+        evento.preventDefault();
+        estadoForm.textContent = "Revisá los campos marcados.";
+    }
+});
