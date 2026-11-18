@@ -1,0 +1,34 @@
+[
+    {
+      "id": 1,
+      "titulo": "Heladera Aurora NIX-01 340Lts",
+      "descripcion": "Heladera con freezer de 340 litros, diseñada en un elegante color gris que combina estilo y funcionalidad. Cuenta con pantalla digital y un sistema de refrigeración eficiente.",
+      "precio": 1195999,
+      "imagen": "images/heladera-1.jpg",
+      "imagenHover": "images/heladera-2.jpg"
+    },
+    {
+      "id": 2,
+      "titulo": "Cafetera Espresso Aurora RN-01",
+      "descripcion": "Cafetera espresso de acero inoxidable con bomba de 20 bares, molinillo integrado con 15 niveles de molienda y vaporizador de leche.",
+      "precio": 235500,
+      "imagen": "images/cafetera-1.jpg",
+      "imagenHover": "images/cafetera-2.jpg"
+    },
+    {
+      "id": 3,
+      "titulo": "Freidora de Aire KAFFA FX-550 GlassVision",
+      "descripcion": "Freidora de aire digital de 5,5 litros con ventana panorámica, panel táctil con 8 programas y temperatura regulable de 80 °C a 200 °C.",
+      "precio": 169799,
+      "imagen": "images/freidora-1.jpg",
+      "imagenHover": "images/freidora-2.jpg"
+    },
+    {
+      "id": 4,
+      "titulo": "Pava Eléctrica KAFFA GK-800 Precision",
+      "descripcion": "Pava eléctrica en acero inoxidable negro mate con pantalla LED, temperaturas de 40 °C a 100 °C, función para mantener caliente y bloqueo de seguridad.",
+      "precio": 43249,
+      "imagen": "images/pava-1.jpg",
+      "imagenHover": "images/pava-2.jpg"
+    }
+  ]
