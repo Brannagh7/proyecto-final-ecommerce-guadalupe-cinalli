@@ -366,6 +366,31 @@ textarea:focus-visible {
     outline: 3px solid #f2b600;
     outline-offset: 2px;
 }
+.oculto {
+    display: none !important;
+}
+
+.form-compra {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    max-width: none;
+    margin: 0;
+}
+
+select {
+    padding: 0.6rem;
+    border: 1px solid #aaa;
+    border-radius: 6px;
+}
+
+select.invalido {
+    border-color: #b3261e;
+}
+
+.aviso-simulacion {
+    font-size: 0.8rem;
+}
 
 /*Media*/
 @media (max-width: 768px) {

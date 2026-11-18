@@ -165,6 +165,9 @@ function cerrarCarrito() {
     panel.classList.remove("abierto");
     overlay.classList.remove("abierto");
     panel.setAttribute("aria-hidden", "true");
+    formCompra.classList.add("oculto");
+    listaCarrito.classList.remove("oculto");
+    panelFooter.classList.remove("oculto");
     btnAbrir.focus();
 }
 
@@ -216,13 +219,107 @@ listaCarrito.addEventListener("click", function (evento) {
 
 btnVaciar.addEventListener("click", vaciarCarrito);
 
+// finalizar compra //
+
+const formCompra = document.getElementById("form-compra");
+const panelFooter = document.querySelector(".panel-footer");
+const btnVolver = document.getElementById("volver-carrito");
+
+function mostrarVistaCompra(mostrar) {
+    formCompra.classList.toggle("oculto", !mostrar);
+    listaCarrito.classList.toggle("oculto", mostrar);
+    panelFooter.classList.toggle("oculto", mostrar);
+}
+
+function validarCompra() {
+    const nombre = document.getElementById("compra-nombre");
+    const email = document.getElementById("compra-email");
+    const direccion = document.getElementById("compra-direccion");
+    const metodo = document.getElementById("compra-metodo");
+    const formato = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    let ok = true;
+
+    if (nombre.value.trim().length < 2) {
+        mostrarError(nombre, "Ingresá tu nombre y apellido.");
+        ok = false;
+    } else {
+        mostrarError(nombre, "");
+    }
+
+    if (!formato.test(email.value.trim())) {
+        mostrarError(email, "Ingresá un correo válido (ej: nombre@correo.com).");
+        ok = false;
+    } else {
+        mostrarError(email, "");
+    }
+
+    if (direccion.value.trim().length < 5) {
+        mostrarError(direccion, "Ingresá una dirección de entrega.");
+        ok = false;
+    } else {
+        mostrarError(direccion, "");
+    }
+
+    if (metodo.value === "") {
+        mostrarError(metodo, "Elegí un método de pago.");
+        ok = false;
+    } else {
+        mostrarError(metodo, "");
+    }
+
+    return ok;
+}
+
 btnFinalizar.addEventListener("click", function () {
     if (obtenerCarrito().length === 0) {
+        mostrarAviso("Tu carrito está vacío");
         return;
     }
+    mostrarVistaCompra(true);
+});
+
+btnVolver.addEventListener("click", function () {
+    mostrarVistaCompra(false);
+});
+
+formCompra.addEventListener("submit", function (evento) {
+    evento.preventDefault();
+
+    if (!validarCompra()) {
+        return;
+    }
+
+    const nombre = document.getElementById("compra-nombre").value.trim();
+    const metodo = document.getElementById("compra-metodo").value;
+
+    let total = 0;
+    let filas = "";
+
+    obtenerCarrito().forEach(function (item) {
+        const producto = productos.find(function (p) {
+            return p.id === item.id;
+        });
+        if (!producto) {
+            return;
+        }
+        const subtotal = producto.precio * item.cantidad;
+        total += subtotal;
+        filas += `<li>${item.cantidad} × ${producto.titulo} — ${formatearPrecio(subtotal)}</li>`;
+    });
+
     guardarCarrito([]);
     actualizarContador();
-    listaCarrito.innerHTML = "<p>¡Gracias por tu compra! Es una simulación: no se realizó ningún cobro.</p>";
+    formCompra.reset();
+    mostrarVistaCompra(false);
+
+    listaCarrito.innerHTML = `
+        <h3 id="gracias"></h3>
+        <ul>${filas}</ul>
+        <p><strong>Total: ${formatearPrecio(total)}</strong></p>
+        <p>Pago: ${metodo}</p>
+        <p>Es una simulación.</p>
+    `;
+    document.getElementById("gracias").textContent = "¡Gracias por tu compra, " + nombre + "!";
     totalCarrito.textContent = formatearPrecio(0);
 });
 

@@ -124,6 +124,35 @@
             <button type="button" id="cerrar-carrito" aria-label="Cerrar carrito">✕</button>
         </div>
         <div id="lista-carrito" class="lista-carrito"></div>
+        <form id="form-compra" class="form-compra oculto" novalidate>
+            <h3>Datos de la compra</h3>
+
+            <label for="compra-nombre">Nombre y apellido:</label>
+            <input type="text" id="compra-nombre" aria-describedby="error-compra-nombre">
+            <span id="error-compra-nombre" class="error" role="alert"></span>
+
+            <label for="compra-email">Correo electrónico:</label>
+            <input type="email" id="compra-email" aria-describedby="error-compra-email">
+            <span id="error-compra-email" class="error" role="alert"></span>
+
+            <label for="compra-direccion">Dirección de entrega:</label>
+            <input type="text" id="compra-direccion" aria-describedby="error-compra-direccion">
+            <span id="error-compra-direccion" class="error" role="alert"></span>
+
+            <label for="compra-metodo">Método de pago:</label>
+            <select id="compra-metodo" aria-describedby="error-compra-metodo">
+                <option value="">Elegí una opción</option>
+                <option value="Tarjeta de crédito o débito">Tarjeta de crédito o débito</option>
+                <option value="Transferencia bancaria">Transferencia bancaria</option>
+                <option value="Efectivo al recibir">Efectivo al recibir</option>
+            </select>
+            <span id="error-compra-metodo" class="error" role="alert"></span>
+
+            <p class="aviso-simulacion">Es una simulación: no ingreses datos reales de tarjeta.</p>
+
+            <button type="submit">Confirmar compra</button>
+            <button type="button" id="volver-carrito" class="secundario">Volver al carrito</button>
+        </form>
         <div class="panel-footer">
             <p class="total">Total: <span id="total-carrito">$ 0,00</span></p>
             <button type="button" id="finalizar-compra">Finalizar compra</button>
